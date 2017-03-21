@@ -2,6 +2,7 @@
 
 // ### 要求：通过函数找出最大子序列
 
+// (一)递归求解
 // **分析**：最大子序列可能出现在三处
 // 1. 整个出现在数组的左半部
 // 2. 整个出现在数组的右半部
@@ -11,6 +12,8 @@
 // 1. 1, 2 可使用递归来解决
 // 2. 第三中情况可通过求出前半部分(包含最后一个元素)最大子序列和后半部分(包含第一个元素)最大子序列，然后求和即可。
 // 3. 最后算出最大值
+
+// (二) 联机算法
 
 int roughMaxSubsequenceSum(int a[], int n)
 {
@@ -26,8 +29,7 @@ int roughMaxSubsequenceSum(int a[], int n)
             }
         }
     }
-    printf("sum = %d\n", sum);
-    return sum
+    return sum;
 }
 
 int max3(int a, int b, int c)
@@ -81,10 +83,26 @@ int recursiveMaxSubsequenceSum(int a[], int left, int right)
     return max;
 }
 
+int maxSubsqSum(int a[], int n)
+{
+    int max, sum;
+    max = sum = 0;
+    for (int i=0; i<n; i++){
+        sum += a[i];
+        if (sum > max) {
+            max = sum;
+        } else if(sum < 0) {
+            sum = 0;
+        }
+    }
+    return max;
+}
+
 int main()
 {
     int a[] = {1, 2, -3, 4, 5};
-    // getMaxSubsequenceSum(a, 5);
+    roughMaxSubsequenceSum(a, 5);
     recursiveMaxSubsequenceSum(a, 0, 4);
+    printf("%d\n", maxSubsqSum(a, 5));
     return 0;
 }
