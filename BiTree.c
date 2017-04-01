@@ -3,6 +3,13 @@
 
 #define MaxSize 50
 
+// recursive a string
+// char *s = "sdfsdfsdfs";
+// while (*s != '\0') {
+//     printf("%C", *s);
+//     *s++;
+// }
+
 typedef struct node
 {
     int data;
