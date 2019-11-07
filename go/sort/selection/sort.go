@@ -1,8 +1,13 @@
+// time complexity: smallest O(n^2), avg: O(n^2), biggest: O(n^2)
 package sort
 
 func Sort(a []int, n int) {
+	if n <= 1 {
+		return
+	}
+
 	for i := -1; i < n-2; i++ {
-		// find the most small element
+		// find the smallest element
 		small := i + 1
 		for j := small + 1; j < n; j++ {
 			if a[j] < a[small] {
