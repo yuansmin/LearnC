@@ -45,17 +45,18 @@ func merge(a []int, start, mid, end int) {
 		k++
 	}
 
-	for i <= mid {
-		tmp[k] = a[i]
-		i++
+	var leftStart, leftEnd int
+	if i <= mid {
+		leftStart, leftEnd = i, mid
+	} else {
+		leftStart, leftEnd = j, end
+	}
+	for leftStart <= leftEnd {
+		tmp[k] = a[leftStart]
+		leftStart++
 		k++
 	}
 
-	for j <= end {
-		tmp[k] = a[j]
-		j++
-		k++
-	}
 	for i := 0; start+i <= end; i++ {
 		a[start+i] = tmp[i]
 	}
