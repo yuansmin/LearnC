@@ -1,13 +1,14 @@
 package sort
 
+import "fmt"
+
 func Sort(a []int, n int) {
 	if n <= 1 {
 		return
 	}
 	// heapfy
-	for i := 1; i < n; i++ {
-		heapify(a, i)
-	}
+	heapifyUp(a, n)
+	// heapifyUpSimple(a, n)
 
 	// sort
 	for i := n - 1; i >= 1; i-- {
@@ -15,6 +16,32 @@ func Sort(a []int, n int) {
 		a[0] = a[i]
 		heapifyDown(a, 0, i)
 		a[i] = tmp
+	}
+}
+
+// heapify from none leaf node
+// n: length of array
+func heapifyUp(a []int, n int) {
+	fmt.Printf("%v\n", a)
+	for mid := (n - 2) / 2; mid >= 0; mid-- {
+		bigger := mid
+		if mid*2+2 < n && a[mid*2+2] > a[bigger] {
+			bigger = mid*2 + 2
+		}
+		if a[mid*2+1] > a[bigger] {
+			bigger = mid*2 + 1
+		}
+		if mid == bigger {
+			continue
+		}
+		a[mid], a[bigger] = a[bigger], a[mid]
+		heapifyDown(a, bigger, n)
+	}
+}
+
+func heapifyUpSimple(a []int, n int) {
+	for i := 1; i < n; i++ {
+		heapify(a, i)
 	}
 }
 
